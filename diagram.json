@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "author": "Aryan Bathla",
+  "editor": "wokwi",
+
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 80,
+      "left": 220,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "sensor",
+      "top": -80,
+      "left": 180,
+      "attrs": {
+        "distance": "100"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "redLed",
+      "top": 270,
+      "left": 100,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "redResistor",
+      "top": 280,
+      "left": 20,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "greenLed",
+      "top": 270,
+      "left": 390,
+      "attrs": {
+        "color": "green"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "greenResistor",
+      "top": 280,
+      "left": 310,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo",
+      "top": 110,
+      "left": 500,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir",
+      "top": 80,
+      "left": -120,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "buzzer",
+      "top": 280,
+      "left": 500,
+      "attrs": {
+        "volume": "0.1"
+      }
+    }
+  ],
+
+  "connections": [
+    [ "esp:VIN", "sensor:VCC", "red", [] ],
+    [ "esp:D5", "sensor:TRIG", "green", [] ],
+    [ "esp:D18","sensor:ECHO", "blue", [] ],
+    [ "esp:GND.2", "sensor:GND", "black", [] ],
+
+    [ "esp:D25", "redResistor:1", "red", [] ],
+    [ "redResistor:2", "redLed:A", "red", [] ],
+    [ "redLed:C", "esp:GND.1", "black", [] ],
+
+    [ "esp:D26", "greenResistor:1", "green", [] ],
+    [ "greenResistor:2", "greenLed:A", "green", [] ],
+    [ "greenLed:C", "esp:GND.1", "black", [] ],
+
+    [ "servo:PWM", "esp:D13", "orange", [] ],
+    [ "servo:V+", "esp:VIN", "red", [] ],
+    [ "servo:GND", "esp:GND.1", "black", [] ],
+
+    [ "pir:VCC", "esp:VIN", "red", [] ],
+    [ "pir:OUT", "esp:D27", "purple", [] ],
+    [ "pir:GND", "esp:GND.1", "black", [] ],
+
+    [ "buzzer:1", "esp:D14", "orange", [] ],
+    [ "buzzer:2", "esp:GND.1", "black", [] ],
+
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ]
+  ],
+
+  "dependencies": {},
+
+  "serialMonitor": {
+    "display": "always",
+    "collapse": false
+  }
+}
