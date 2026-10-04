@@ -21,10 +21,10 @@ The Wokwi prototype uses:
 
 The system uses four operating states:
 
-- **AVAILABLE** – The parking space is confirmed as available. The green LED is on and the barrier opens.
-- **OCCUPIED** – The parking space is confirmed as occupied. The red LED is on and the barrier remains closed.
-- **CHECKING** – Sensor readings are uncertain or conflicting. The barrier remains closed.
-- **FAILSAFE** – An invalid ultrasonic reading is detected. The barrier remains closed, and a warning is activated.
+AVAILABLE – The parking space is confirmed as available. The green LED is on and the barrier opens.
+OCCUPIED – The parking space is confirmed as occupied. The red LED is on and the barrier remains closed.
+CHECKING – Sensor readings are uncertain or conflicting. The barrier remains closed.
+FAILSAFE – An invalid ultrasonic reading is detected. The barrier remains closed, and a warning is activated.
 
 The decision logic uses sensor fusion, distance hysteresis, and three consecutive matching readings to reduce unreliable state changes.
 
@@ -40,10 +40,10 @@ The ThingSpeak channel uses:
 
 Parking state values:
 
-- `0` – AVAILABLE
-- `1` – OCCUPIED
-- `2` – CHECKING
-- `3` – FAILSAFE
+`0` – AVAILABLE
+`1` – OCCUPIED
+`2` – CHECKING
+`3` – FAILSAFE
 
 A ThingSpeak Write API key is required for cloud uploads. The public source code contains the placeholder:
 

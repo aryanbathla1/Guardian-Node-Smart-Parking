@@ -4,13 +4,11 @@
 #include <WiFiClientSecure.h>
 #include <ESP32Servo.h>
 
-// =====================================================
-// GUARDIAN-NODE SMART PARKING SYSTEM
+// GUARDIAN NODE SMART PARKING SYSTEM
 // 3707ICT - Automation and IoT
-// =====================================================
 
 
-// -------------------- PIN DEFINITIONS --------------------
+// PIN DEFINITIONS
 
 const int TRIG_PIN   = 5;
 const int ECHO_PIN   = 18;
@@ -23,7 +21,7 @@ const int PIR_PIN    = 27;
 const int BUZZER_PIN = 14;
 
 
-// -------------------- PARKING THRESHOLDS --------------------
+// PARKING THRESHOLDS
 
 // Hysteresis prevents rapid switching around one threshold.
 const float OCCUPIED_DISTANCE = 45.0;
@@ -33,13 +31,13 @@ const float AVAILABLE_DISTANCE = 55.0;
 const int CONFIRMATION_READINGS = 3;
 
 
-// -------------------- SERVO POSITIONS --------------------
+// SERVO POSITIONS
 
 const int BARRIER_CLOSED = 0;
 const int BARRIER_OPEN   = 90;
 
 
-// -------------------- NON-BLOCKING TIMING --------------------
+// NON-BLOCKING TIMING
 
 const unsigned long SENSOR_INTERVAL = 1000;
 const unsigned long CLOUD_INTERVAL  = 20000;
@@ -50,19 +48,19 @@ unsigned long lastCloudTime = 0;
 unsigned long lastWiFiRetryTime = 0;
 
 
-// -------------------- WIFI --------------------
+// WIFI
 
 const char* WIFI_SSID = "Wokwi-GUEST";
 const char* WIFI_PASSWORD = "";
 
 
-// -------------------- THINGSPEAK --------------------
+// THINGSPEAK
 
 // Replace this with the Write API Key from your ThingSpeak channel.
 const char* THINGSPEAK_WRITE_KEY = "YOUR_WRITE_API_KEY";
 
 
-// -------------------- SYSTEM STATE --------------------
+// SYSTEM STATE
 
 enum ParkingState {
   AVAILABLE,
@@ -82,9 +80,7 @@ int occupiedCount = 0;
 int availableCount = 0;
 
 
-// =====================================================
 // FUNCTION DECLARATIONS
-// =====================================================
 
 float readDistance();
 void evaluateParkingState(float distance, bool motion);
@@ -97,9 +93,7 @@ const char* getStateName(ParkingState state);
 int getStateValue(ParkingState state);
 
 
-// =====================================================
 // SETUP
-// =====================================================
 
 void setup() {
 
@@ -124,10 +118,8 @@ void setup() {
   barrierServo.write(BARRIER_CLOSED);
 
   Serial.println();
-  Serial.println("======================================");
   Serial.println(" Guardian-Node Smart Parking System");
-  Serial.println("======================================");
-
+ 
   connectWiFi();
 
   Serial.println("System initialised.");
@@ -135,9 +127,7 @@ void setup() {
 }
 
 
-// =====================================================
 // MAIN LOOP
-// =====================================================
 
 void loop() {
 
@@ -172,9 +162,7 @@ void loop() {
 }
 
 
-// =====================================================
 // ULTRASONIC SENSOR
-// =====================================================
 
 float readDistance() {
 
@@ -197,9 +185,7 @@ float readDistance() {
 }
 
 
-// =====================================================
 // SENSOR FUSION AND INTELLIGENT DECISION LOGIC
-// =====================================================
 
 void evaluateParkingState(float distance, bool motion) {
 
@@ -261,9 +247,7 @@ void evaluateParkingState(float distance, bool motion) {
 }
 
 
-// =====================================================
 // ACTUATOR CONTROL
-// =====================================================
 
 void applyState(ParkingState state) {
 
@@ -322,9 +306,7 @@ void applyState(ParkingState state) {
 }
 
 
-// =====================================================
 // WIFI
-// =====================================================
 
 void connectWiFi() {
 
@@ -371,9 +353,7 @@ void maintainWiFi() {
 }
 
 
-// =====================================================
 // THINGSPEAK CLOUD UPLOAD
-// =====================================================
 
 void uploadToThingSpeak() {
 
@@ -439,9 +419,7 @@ void uploadToThingSpeak() {
 }
 
 
-// =====================================================
 // SERIAL MONITOR
-// =====================================================
 
 void printSystemStatus() {
 
@@ -487,9 +465,7 @@ void printSystemStatus() {
 }
 
 
-// =====================================================
 // STATE HELPERS
-// =====================================================
 
 const char* getStateName(ParkingState state) {
 
